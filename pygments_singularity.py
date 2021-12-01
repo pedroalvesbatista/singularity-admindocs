@@ -3,14 +3,14 @@ from pygments.token import *
 from pygments.lexers.shell import BashLexer
 import re
 
-class SingularityLexer(RegexLexer):
+class ApptainerLexer(RegexLexer):
     """
-    Lexer for pages in Singularity Admin Guide at https://www.sylabs.io/guides/3.0/admin-guide/
+    Lexer for pages in Apptainer Admin Guide at https://www.sylabs.io/guides/3.0/admin-guide/
     """
 
-    name = 'Singularity'
+    name = 'Apptainer'
     aliases = ['apptainer']
-    filenames = ['*.def', 'Singularity']
+    filenames = ['*.def', 'Apptainer']
     flags = re.IGNORECASE | re.MULTILINE | re.DOTALL
 
     _headers = r'^(\s)*(bootstrap|from|osversion|mirrorurl|include|registry|namespace|includecmd)(:)'

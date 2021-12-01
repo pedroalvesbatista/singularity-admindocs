@@ -5,7 +5,7 @@
 Installed Files
 ===============
 
-An installation of Singularity {InstallationVersion}, performed as root via
+An installation of Apptainer {InstallationVersion}, performed as root via
 ``sudo make install`` consists of the following files, with ownership
 and permissions required to use the `setuid` workflow:
 
@@ -42,7 +42,7 @@ and permissions required to use the `setuid` workflow:
     libexec/apptainer/cni/tuning root:root 755 (-rwxr-xr-x)
     libexec/apptainer/cni/vlan root:root 755 (-rwxr-xr-x)
 
-    # Singularity configuration
+    # Apptainer configuration
     etc/apptainer root:root 755 (drwxr-xr-x)
     etc/apptainer/capability.json root:root 644 (-rw-r--r--)
     etc/apptainer/cgroups root:root 755 (drwxr-xr-x)

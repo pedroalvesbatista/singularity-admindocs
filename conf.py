@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Singularity Container documentation build configuration file, created by
+# Apptainer Container documentation build configuration file, created by
 # sphinx-quickstart on Tue Aug 26 14:19:49 2014.
 #
 # This file is execfile()d with the current directory set to its
@@ -43,8 +43,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'Singularity Admin Guide'
-author = u'Singularity Project Contributors'
+project = u'Apptainer Admin Guide'
+author = u'Apptainer Project Contributors'
 copyright = u'2017-2020, Sylabs Inc'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -244,7 +244,7 @@ latex_logo = 'logo.png'
 
 # The title of the document. It defaults to the html_title option
 # but can be set independently for epub creation.
-epub_title = 'Singularity ' + version + ' Administrator Guide'
+epub_title = 'Apptainer ' + version + ' Administrator Guide'
 
 # The author of the document. This is put in the Dublin Core metadata.
 # It defaults to the author option.
@@ -285,8 +285,8 @@ epub_exclude_files = []
 
 sys.path.append(os.path.join(os.path.dirname(__file__), '.'))
 from sphinx.highlighting import lexers
-from pygments_apptainer import SingularityLexer
+from pygments_apptainer import ApptainerLexer
 from replacements import *
 
-# lexer for Singularity definition files (added here until it is upstreamed into Pygments).
-lexers['apptainer'] = SingularityLexer(startinline=True)
+# lexer for Apptainer definition files (added here until it is upstreamed into Pygments).
+lexers['apptainer'] = ApptainerLexer(startinline=True)
