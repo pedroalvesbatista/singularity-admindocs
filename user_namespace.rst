@@ -69,10 +69,10 @@ Unprivileged Installations
 
 As detailed in the :ref:`non-setuid installation <install-nonsetuid>`
 section, Singularity can be compiled or configured with the ``allow
-setuid = no`` option in ``singularity.conf`` to not perform privileged
+setuid = no`` option in ``apptainer.conf`` to not perform privileged
 operations using the ``starter-setuid`` binary.
 
-When singularity does not use ``setuid`` all container execution will
+When apptainer does not use ``setuid`` all container execution will
 use a user namespace. In this mode of operation, some features are not
 available, and there are impacts to the security/integrity guarantees
 when running SIF container images:
@@ -94,7 +94,7 @@ when running SIF container images:
 --userns option
 ---------------
 
-The ``--userns`` option to `singularity run/exec/shell` will start a
+The ``--userns`` option to `apptainer run/exec/shell` will start a
 container using a user namespace, avoiding the setuid privileged
 workflow for container setup even if Singularity was compiled and
 configured to use setuid by default.
@@ -126,7 +126,7 @@ In addition to user namespace support, Singularity must manipulate
 ``subuid`` and ``subgid`` maps for the user namepsace it creates. By
 default this happens transparently in the setuid workflow. With
 unprivileged installations of Singularity or where ``allow setuid =
-no`` is set in ``singularity.conf``, Singularity attempts to use
+no`` is set in ``apptainer.conf``, Singularity attempts to use
 external setuid binaries ``newuidmap`` and ``newgidmap``, so you
 need to install those binaries on your system.
 
@@ -249,7 +249,7 @@ configured to use a network veth pair.
 .. warning::
 
    Do not change the ``fakeroot`` network type in
-   ``etc/singularity/network/40_fakeroot.conflist`` without
+   ``etc/apptainer/network/40_fakeroot.conflist`` without
    considering the security implications.
 
 .. note::
@@ -272,7 +272,7 @@ will automatically ensure that generated subuid/subgid ranges are an
 approriate size, and do not overlap.
 
 ``config fakeroot`` must be run as the ``root`` user, or via ``sudo
-singularity config fakeroot`` as the ``/etc/subuid`` and
+apptainer config fakeroot`` as the ``/etc/subuid`` and
 ``/etc/subgid`` files form part of the system configuration, and are
 security sensitive. You may ``--add`` or ``--remove`` user
 subuid/subgid mappings. You can also ``--enable`` or ``--disable``
@@ -298,7 +298,7 @@ mapping entries so that ``<user>`` can use the fakeroot feature of Singularity:
  
  .. code-block:: none
 
-  $ sudo singularity config fakeroot --add dave
+  $ sudo apptainer config fakeroot --add dave
 
   # Show generated `/etc/subuid`
   $ cat /etc/subuid 
@@ -332,7 +332,7 @@ able to use the fakeroot feature of Singularity:
 
 .. code-block:: none
 
-  $ sudo singularity config fakeroot --remove dave
+  $ sudo apptainer config fakeroot --remove dave
 
 .. warning::
 
@@ -352,14 +352,14 @@ user.
 .. code-block:: none
 
   # Disable dave
-  $ sudo singularity config fakeroot --disable dave
+  $ sudo apptainer config fakeroot --disable dave
 
   # Entry is commented
   $ cat /etc/subuid
   !1000:4294836224:65536
 
   # Enable dave
-  $ sudo singularity config fakeroot --enable dave
+  $ sudo apptainer config fakeroot --enable dave
   
   # Entry is active
   $ cat /etc/subuid

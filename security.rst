@@ -40,8 +40,8 @@ A SIF file is an immutable container runtime image. It is a physical representat
 important component of SIF that elicits security feature is the ability to cryptographically sign a container, creating a signature
 block within the SIF file which can guarantee immutability and provide accountability as to who signed it. Singularity follows the 
 `OpenPGP <https://www.openpgp.org/>`_ standard to create and manage these keys. After building an image within Singularity, users can
-``singularity sign`` the container and push it to the Library along with its public PGP key(Stored in :ref:`Keystore <keystore>`) which 
-later can be verified (``singularity verify``) while pulling or downloading the image. This feature in particular 
+``apptainer sign`` the container and push it to the Library along with its public PGP key(Stored in :ref:`Keystore <keystore>`) which 
+later can be verified (``apptainer verify``) while pulling or downloading the image. This feature in particular 
 protects collaboration within and between systems and teams. 
 
 SIF Encryption

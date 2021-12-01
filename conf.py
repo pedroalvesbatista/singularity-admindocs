@@ -116,8 +116,8 @@ html_theme_options = {
 
 html_context = {
     'display_github': True,
-    'github_user': 'hpcng',
-    'github_repo': 'singularity-admindocs',
+    'github_user': 'apptainer',
+    'github_repo': 'apptainer-admindocs',
     'github_version': 'master',
     'conf_py_path': '/',
 }
@@ -195,7 +195,7 @@ html_show_sourcelink = True
 #html_file_suffix = None
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'singularity-' + version +'-admin-guide'
+htmlhelp_basename = 'apptainer-' + version +'-admin-guide'
 
 
 # -- Options for LaTeX output ---------------------------------------------
@@ -215,7 +215,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-  ('index', 'singularity-' + version + '-admin-guide.tex', project, author, 'manual'),
+  ('index', 'apptainer-' + version + '-admin-guide.tex', project, author, 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -259,7 +259,7 @@ epub_publisher = author
 epub_copyright = copyright
 
 # The basename for the epub file. It defaults to the project name.
-epub_basename = 'singularity-' + version + '-admin-guide'
+epub_basename = 'apptainer-' + version + '-admin-guide'
 
 # The HTML theme for the epub output.
 # Since the default themes are not optimized for small screen space,
@@ -269,7 +269,7 @@ epub_theme = 'epub'
 
 # The unique identifier of the text. This can be a ISBN number
 # or the project homepage.
-epub_identifier = 'https://github.com/hpcng/singularity-admindocs'
+epub_identifier = 'https://github.com/apptainer-admindocs'
 
 # The publication scheme for the epub_identifier. This is put in the Dublin Core metadata.
 # For published books the scheme is 'ISBN'. If you use the project homepage, 'URL' seems reasonable.
@@ -285,8 +285,8 @@ epub_exclude_files = []
 
 sys.path.append(os.path.join(os.path.dirname(__file__), '.'))
 from sphinx.highlighting import lexers
-from pygments_singularity import SingularityLexer
+from pygments_apptainer import SingularityLexer
 from replacements import *
 
 # lexer for Singularity definition files (added here until it is upstreamed into Pygments).
-lexers['singularity'] = SingularityLexer(startinline=True)
+lexers['apptainer'] = SingularityLexer(startinline=True)

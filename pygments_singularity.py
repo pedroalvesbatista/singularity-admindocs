@@ -9,7 +9,7 @@ class SingularityLexer(RegexLexer):
     """
 
     name = 'Singularity'
-    aliases = ['singularity']
+    aliases = ['apptainer']
     filenames = ['*.def', 'Singularity']
     flags = re.IGNORECASE | re.MULTILINE | re.DOTALL
 

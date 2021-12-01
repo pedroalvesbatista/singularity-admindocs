@@ -119,7 +119,7 @@ Singularity cache / atomic rename
 
 Singularity will cache SIF container images generated from remote
 sources, and any OCI/docker layers used to create them. The cache is
-created at ``$HOME/.singularity/cache`` by default. The location of
+created at ``$HOME/.apptainer/cache`` by default. The location of
 the cache can be changed by setting the ``SINGULARITY_CACHEDIR``
 environment variable.
 
@@ -146,7 +146,7 @@ share.
 
 If you are not certain that your ``$HOME`` or ``SINGULARITY_CACHEDIR``
 filesytems support atomic rename, do not run Singularity in parallel
-using remote container URLs. Instead use ``singularity pull`` to
+using remote container URLs. Instead use ``apptainer pull`` to
 create a local SIF image, and then run this SIF image in a parallel
 step. An alternative is to use the ``--disable-cache`` option, but
 this will result in each Singularity instance independently fetching
@@ -295,33 +295,31 @@ Download Singularity from a release
 
 You can download Singularity from one of the releases. To see a full
 list, visit `the GitHub release page
-<https://github.com/hpcng/singularity/releases>`_.  After deciding on
+<https://github.com/apptainer/releases>`_.  After deciding on
 a release to install, you can run the following commands to proceed
 with the installation.
 
 .. code-block:: none
 
     $ export VERSION={InstallationVersion} && # adjust this as necessary \
-        wget https://github.com/hpcng/singularity/releases/download/v${VERSION}/singularity-${VERSION}.tar.gz && \
-        tar -xzf singularity-${VERSION}.tar.gz && \
-        cd singularity
+        wget https://github.com/apptainer/releases/download/v${VERSION}/apptainer-${VERSION}.tar.gz && \
+        tar -xzf apptainer-${VERSION}.tar.gz && \
+        cd apptainer
 
 Checkout Code from Git
 ======================
 
 The following commands will install Singularity from the `GitHub repo
-<https://github.com/hpcng/singularity>`_ to ``/usr/local``. This
+<https://github.com/apptainer>`_ to ``/usr/local``. This
 method will work for >=v{InstallationVersion}. To install an older
-tagged release see `older versions of the docs
-<https://www.sylabs.io/docs/>`_.
+tagged release see `older versions of the docs <https://www.apptainer.org/docs/>`_.
 
 When installing from source, you can decide to install from either a
 **tag**, a **release branch**, or from the **master branch**.
 
 - **tag**: GitHub tags form the basis for releases, so installing from
   a tag is the same as downloading and installing a `specific release
-  <https://github.com/hpcng/singularity/releases>`_.  Tags are
-  expected to be relatively stable and well-tested.
+  <https://github.com/apptainer/releases>`_.  Tags are expected to be relatively stable and well-tested.
 
 - **release branch**: A release branch represents the latest version
   of a minor release with all the newest bug fixes and enhancements
@@ -331,7 +329,7 @@ When installing from source, you can decide to install from either a
   code in a tagged point release.
 
 - **master branch**: The ``master`` branch contains the latest,
-  bleeding edge version of Singularity. This is the default branch
+  bleeding edge version of Apptainer. This is the default branch
   when you clone the source code, so you don't have to check out any
   new branches to install it. The ``master`` branch changes quickly
   and may be unstable.
@@ -341,8 +339,8 @@ appropriate directory use these commands.
 
 .. code-block:: none
 
-    $ git clone https://github.com/hpcng/singularity.git && \
-        cd singularity && \
+    $ git clone https://github.com/apptainer.git && \
+        cd apptainer && \
         git checkout v{InstallationVersion}
 
 Compile Singularity
@@ -355,7 +353,7 @@ compile and install.
 To support the SIF image format, automated networking setup etc., and
 older Linux distributions without user namespace support, Singularity
 must be ``make install``ed as root or with ``sudo``, so it can install
-the ``libexec/singularity/bin/starter-setuid`` binary with root
+the ``libexec/apptainer/bin/starter-setuid`` binary with root
 ownership and setuid permissions for privileged operations. If you
 need to install as a normal user, or do not want to use setuid
 functionality :ref:`see below <install-nonsetuid>`.
@@ -372,7 +370,7 @@ directory hierarchy. You can specify a custom directory with the
 
 .. code-block:: none
 
-    $ ./mconfig --prefix=/opt/singularity
+    $ ./mconfig --prefix=/opt/apptainer
 
 This option can be useful if you want to install multiple versions of
 Singularity, install a personal version of Singularity on a shared
@@ -384,7 +382,7 @@ are some of the most common options that you may need to use when
 building Singularity from source.
 
 - ``--sysconfdir``: Install read-only config files in sysconfdir.
-  This option is important if you need the ``singularity.conf`` file
+  This option is important if you need the ``apptainer.conf`` file
   or other configuration files in a custom location.
 
 - ``--localstatedir``: Set the state directory where containers are
@@ -404,20 +402,20 @@ Unprivileged (non-setuid) Installation
 
 If you need to install Singularity as a non-root user, or do not wish
 to allow the use of a setuid root binary, you can configure
-singularity with the ``--without-suid`` option to mconfig:
+apptainer with the ``--without-suid`` option to mconfig:
 
 .. code-block:: none
 
-    $ ./mconfig --without-suid --prefix=/home/dave/singularity && \
+    $ ./mconfig --without-suid --prefix=/home/dave/apptainer && \
         make -C ./builddir && \
         make -C ./builddir install
 
 If you have already installed Singularity you can disable the setuid
 flow by setting the option ``allow setuid = no`` in
-``etc/singularity/singularity.conf`` within your installation
+``etc/apptainer/apptainer.conf`` within your installation
 directory.
 
-When singularity does not use setuid all container execution will use
+When apptainer does not use setuid all container execution will use
 a user namespace. This requires support from your operating system
 kernel, and imposes some limitations on functionality. You should
 review the :ref:`requirements <userns-requirements>` and
@@ -433,7 +431,7 @@ source the bash completion file:
 
 .. code-block:: none
 
-    $ . /usr/local/etc/bash_completion.d/singularity
+    $ . /usr/local/etc/bash_completion.d/apptainer
 
 Add this command to your `~/.bashrc` file so that bash completion
 continues to work in new shells.  (Adjust the path if you
@@ -448,14 +446,13 @@ Build and install an RPM
 If you use RHEL, CentOS or SUSE, building and installing a Singularity
 RPM allows your Singularity installation be more easily managed,
 upgraded and removed. In Singularity >=v3.0.1 you can build an RPM
-directly from the `release tarball
-<https://github.com/hpcng/singularity/releases>`_.
+directly from the `release tarball <https://github.com/apptainer/releases>`_.
 
 .. note::
 
     Be sure to download the correct asset from the `GitHub releases
-    page <https://github.com/hpcng/singularity/releases>`_.  It
-    should be named `singularity-<version>.tar.gz`.
+    page <https://github.com/apptainer/releases>`_.  It
+    should be named `apptainer-<version>.tar.gz`.
 
 After installing the :ref:`dependencies <install-dependencies>` and
 installing :ref:`Go <install-go>` as detailed above, you are ready to
@@ -464,17 +461,17 @@ download the tarball and build and install the RPM.
 .. code-block:: none
 
     $ export VERSION={InstallationVersion} && # adjust this as necessary \
-        wget https://github.com/hpcng/singularity/releases/download/v${VERSION}/singularity-${VERSION}.tar.gz && \
-        rpmbuild -tb singularity-${VERSION}.tar.gz && \
-        sudo rpm -ivh ~/rpmbuild/RPMS/x86_64/singularity-$VERSION-1.el7.x86_64.rpm && \
-        rm -rf ~/rpmbuild singularity-$VERSION*.tar.gz
+        wget https://github.com/apptainer/releases/download/v${VERSION}/apptainer-${VERSION}.tar.gz && \
+        rpmbuild -tb apptainer-${VERSION}.tar.gz && \
+        sudo rpm -ivh ~/rpmbuild/RPMS/x86_64/apptainer-$VERSION-1.el7.x86_64.rpm && \
+        rm -rf ~/rpmbuild apptainer-$VERSION*.tar.gz
 
 If you encounter a failed dependency error for golang but installed it
 from source, build with this command:
 
 .. code-block:: none
 
-    rpmbuild -tb --nodeps singularity-${VERSION}.tar.gz
+    rpmbuild -tb --nodeps apptainer-${VERSION}.tar.gz
 
 
 Options to ``mconfig`` can be passed using the familiar syntax to
@@ -484,7 +481,7 @@ following:
 
 .. code-block:: none
 
-    rpmbuild -tb --define='_localstatedir /mnt' singularity-$VERSION.tar.gz
+    rpmbuild -tb --define='_localstatedir /mnt' apptainer-$VERSION.tar.gz
 
 .. note::
 
@@ -504,7 +501,7 @@ Singularity:
    
   $ ./mconfig && \
   make -C builddir rpm && \
-  sudo rpm -ivh ~/rpmbuild/RPMS/x86_64/singularity-{InstallationVersion}.el7.x86_64.rpm # or whatever version you built
+  sudo rpm -ivh ~/rpmbuild/RPMS/x86_64/apptainer-{InstallationVersion}.el7.x86_64.rpm # or whatever version you built
 
 
 To build an rpm with an alternative install prefix set ``RPMPREFIX``
@@ -532,12 +529,12 @@ directories to completely remove Singularity.
 .. code-block:: none
 
     $ sudo rm -rf \
-        /usr/local/libexec/singularity \
-        /usr/local/var/singularity \
-        /usr/local/etc/singularity \
-        /usr/local/bin/singularity \
-        /usr/local/bin/run-singularity \
-        /usr/local/etc/bash_completion.d/singularity
+        /usr/local/libexec/apptainer \
+        /usr/local/var/apptainer \
+        /usr/local/etc/apptainer \
+        /usr/local/bin/apptainer \
+        /usr/local/bin/run-apptainer \
+        /usr/local/etc/bash_completion.d/apptainer
 
 If you anticipate needing to remove Singularity, it might be easier to
 install it in a custom directory using the ``--prefix`` option to
@@ -572,7 +569,7 @@ install Singularity.  For instance, on CentOS 6/7/8 do the following:
     $ sudo yum update -y && \
         sudo yum install -y epel-release && \
         sudo yum update -y && \
-        sudo yum install -y singularity
+        sudo yum install -y apptainer
 
 ------------------------------------------
 Testing & Checking the Build Configuration
@@ -584,7 +581,7 @@ library:
 
 .. code-block:: none
 
-    $ singularity exec library://alpine cat /etc/alpine-release
+    $ apptainer exec library://alpine cat /etc/alpine-release
     3.9.2
 
 
@@ -592,21 +589,21 @@ See the `user guide
 <https://www.sylabs.io/guides/\{userversion\}/user-guide/>`__ for more
 information about how to use Singularity.
 
-singularity buildcfg
+apptainer buildcfg
 ====================
 
-Running ``singularity buildcfg`` will show the build configuration of
+Running ``apptainer buildcfg`` will show the build configuration of
 an installed version of Singularity, and lists the paths used by
-Singularity. Use ``singularity buildcfg`` to confirm paths are set
+Singularity. Use ``apptainer buildcfg`` to confirm paths are set
 correctly for your installation, and troubleshoot any 'not-found'
 errors at runtime.
 
 .. code-block:: none
 
-    $ singularity buildcfg
-    PACKAGE_NAME=singularity
+    $ apptainer buildcfg
+    PACKAGE_NAME=apptainer
     PACKAGE_VERSION={InstallationVersion}
-    BUILDDIR=/home/dtrudg/Sylabs/Git/singularity/builddir
+    BUILDDIR=/home/dtrudg/Sylabs/Git/apptainer/builddir
     PREFIX=/usr/local
     EXECPREFIX=/usr/local
     BINDIR=/usr/local/bin
@@ -619,13 +616,13 @@ errors at runtime.
     LOCALSTATEDIR=/usr/local/var
     RUNSTATEDIR=/usr/local/var/run
     INCLUDEDIR=/usr/local/include
-    DOCDIR=/usr/local/share/doc/singularity
+    DOCDIR=/usr/local/share/doc/apptainer
     INFODIR=/usr/local/share/info
     LIBDIR=/usr/local/lib
     LOCALEDIR=/usr/local/share/locale
     MANDIR=/usr/local/share/man
-    SINGULARITY_CONFDIR=/usr/local/etc/singularity
-    SESSIONDIR=/usr/local/var/singularity/mnt/session
+    SINGULARITY_CONFDIR=/usr/local/etc/apptainer
+    SESSIONDIR=/usr/local/var/apptainer/mnt/session
 
 Note that the ``LOCALSTATEDIR`` and ``SESSIONDIR`` should be on local,
 non-shared storage.
@@ -647,7 +644,7 @@ targets from the ``builddir`` directory in the source tree:
   - ``make unit-test`` runs basic unit tests
   - ``make integration-test`` runs integration tests
   - ``make e2e-test`` runs end-to-end tests, which exercise a large
-    number of operations by calling the singularity CLI with different
+    number of operations by calling the apptainer CLI with different
     execution profiles.
 
 .. note::
@@ -705,7 +702,7 @@ Mac
 To use Singularity Desktop for macOS (Beta Preview):
 
 Download a Mac installer package `here
-<https://www.sylabs.io/singularity-desktop-macos/>`__.
+<https://www.sylabs.io/apptainer-desktop-macos/>`__.
 
 Singularity is also available via Vagrant (installable with
 `Homebrew <https://brew.sh>`_ or manually) or with the Singularity Desktop for
@@ -729,8 +726,8 @@ directory to be used with your Vagrant VM.
 
 .. code-block:: none
 
-    $ mkdir vm-singularity && \
-        cd vm-singularity
+    $ mkdir vm-apptainer && \
+        cd vm-apptainer
 
 If you have already created and used this folder for another VM, you will need
 to destroy the VM and delete the Vagrantfile.
@@ -745,7 +742,7 @@ different value for the ``$VM`` variable if you like.)
 
 .. code-block:: none
 
-    $ export VM=sylabs/singularity-3.7-ubuntu-bionic64 && \
+    $ export VM=sylabs/apptainer-3.7-ubuntu-bionic64 && \
         vagrant init $VM && \
         vagrant up && \
         vagrant ssh
@@ -754,7 +751,7 @@ You can check the installed version of Singularity with the following:
 
 .. code-block:: none
 
-    vagrant@vagrant:~$ singularity version
+    vagrant@vagrant:~$ apptainer version
     {InstallationVersion}
 
 

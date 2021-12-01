@@ -8,7 +8,7 @@ pointers to configuration files. More information, including alternate
 installation options and detailed configuration options can be found
 later in this guide.
 
-.. _singularity-architecture:
+.. _apptainer-architecture:
 
 ---------------------------
 Architecture of Singularity
@@ -38,7 +38,7 @@ more complete isolation is important, Singularity can use additional
 Linux namespaces and other security and resource limits to accomplish
 this.
 
-.. _singularity-security:
+.. _apptainer-security:
 
 --------------------
 Singularity Security
@@ -72,7 +72,7 @@ runs small amounts of privileged container setup code via a
 Singularity can perform filesystem loop mounts and other operations
 that need privilege. The setuid flow is the default mode of operation,
 but :ref:`can be disabled <install-nonsetuid>` on build, or in the
-``singularity.conf`` configuration file if required.
+``apptainer.conf`` configuration file if required.
 
 .. note::
 
@@ -83,7 +83,7 @@ but :ref:`can be disabled <install-nonsetuid>` on build, or in the
    runtime.
 
    See the :ref:`non-setuid installation section <install-nonsetuid>` for further
-   detail on how to install singularity to run in non-setuid mode.
+   detail on how to install apptainer to run in non-setuid mode.
 
 ------------------------
 Installation from Source
@@ -187,16 +187,16 @@ Download Singularity from a GitHub release
 ------------------------------------------
 
 You can download Singularity from one of the releases. To see a full list, visit
-`the GitHub release page <https://github.com/hpcng/singularity/releases>`_.
+`the GitHub release page <https://github.com/apptainer/releases>`_.
 After deciding on a release to install, you can run the following commands to
 proceed with the installation.
 
 .. code-block:: none
 
     $ export VERSION={InstallationVersion} && # adjust this as necessary \
-        wget https://github.com/hpcng/singularity/releases/download/v${VERSION}/singularity-${VERSION}.tar.gz && \
-        tar -xzf singularity-${VERSION}.tar.gz && \
-        cd singularity
+        wget https://github.com/apptainer/releases/download/v${VERSION}/apptainer-${VERSION}.tar.gz && \
+        tar -xzf apptainer-${VERSION}.tar.gz && \
+        cd apptainer
 
 
 Compile & Install Singularity
@@ -217,7 +217,7 @@ hierarchy. You can specify a custom directory with the ``--prefix`` option, to
 
 .. code-block:: none
 
-    $ ./mconfig --prefix=/opt/singularity
+    $ ./mconfig --prefix=/opt/apptainer
 
 This option can be useful if you want to install multiple versions of
 Singularity, install a personal version of Singularity on a shared system, or if
@@ -228,7 +228,7 @@ are some of the most common options that you may need to use when
 building Singularity from source.
 
 - ``--sysconfdir``: Install read-only config files in sysconfdir.
-  This option is important if you need the ``singularity.conf`` file
+  This option is important if you need the ``apptainer.conf`` file
   or other configuration files in a custom location.
 
 - ``--localstatedir``: Set the state directory where containers are
@@ -244,19 +244,19 @@ building Singularity from source.
 Configuration
 -------------
 
-Singularity is configured using files under ``etc/singularity`` in
+Singularity is configured using files under ``etc/apptainer`` in
 your ``--prefix``, or ``--syconfdir`` if you used that option with
 ``mconfig``. In a default installation from source without a
 ``--prefix`` set you will find them under
-``/usr/local/etc/singularity``.
+``/usr/local/etc/apptainer``.
 
-You can edit these files directly, or using the ``singularity config
+You can edit these files directly, or using the ``apptainer config
 global`` command as the root user to manage them.
 
-``singularity.conf`` contains the majority of options controlling the
+``apptainer.conf`` contains the majority of options controlling the
 runtime behaviour of Singularity. Additional files control security,
 network, and resource configuration. Head over to the
-:ref:`Configuration files <singularity_configfiles>` section where the
+:ref:`Configuration files <apptainer_configfiles>` section where the
 files and configuration options are discussed.
 
 ----------------
@@ -268,7 +268,7 @@ Sylabs Container Library:
 
 .. code-block:: none
 
-    $ singularity exec library://alpine cat /etc/alpine-release
+    $ apptainer exec library://alpine cat /etc/alpine-release
     3.9.2
 
 

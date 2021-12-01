@@ -1,4 +1,4 @@
-.. _singularity_configfiles:
+.. _apptainer_configfiles:
 
 ===============================
 Singularity Configuration Files
@@ -7,16 +7,16 @@ Singularity Configuration Files
 As a Singularity Administrator, you will have access to various configuration
 files, that will let you manage container resources, set security restrictions
 and configure network options etc, when installing Singularity across the system.
-All these files can be found in ``/usr/local/etc/singularity`` by default (though
+All these files can be found in ``/usr/local/etc/apptainer`` by default (though
 its location will obviously differ based on options passed during the
 installation). This page will describe the following configuration files and
 the various parameters contained by them. They are usually self documenting
 but here are several things to pay special attention to:
 
 -----------------
-singularity.conf
+apptainer.conf
 -----------------
-Most of the configuration options are set using the file ``singularity.conf``
+Most of the configuration options are set using the file ``apptainer.conf``
 that defines the global configuration for Singularity across the entire system.
 Using this file, system administrators can have direct say as to what functions
 the users can utilize. As a security measure, for ``setuid`` installations of
@@ -25,14 +25,14 @@ Singularity will refuse to run. This is not the case for ``non-setuid``
 installations that will only ever execute with user priviledge and thus do not
 require such limitations. The options for this configuration are listed below.
 Options are grouped together based on relevance, the order of options within
-``singularity.conf`` differs.
+``apptainer.conf`` differs.
 
 Setuid and Capabilities
 =======================
 
 ``ALLOW SETUID``:
 To use all features of Singularity containers, Singularity will need to have
-access to some privileged system calls. One way singularity achieves this is by
+access to some privileged system calls. One way apptainer achieves this is by
 using binaries with the ``setuid`` bit enabled. This variable lets you
 enable/disable users ability to utilize these binaries within Singularity. By
 default, it is set to "yes", but when disabled, various Singularity features
@@ -45,7 +45,7 @@ Singularity allows the specification of capabilities kept by the root user
 when running a container by default. Options include:
 
 * full: all capabilities are maintained, this gives the same behavior as the ``--keep-privs`` option.
-* file: only capabilities granted in ``/usr/local/etc/singularity/capabilities/user.root`` are maintained.
+* file: only capabilities granted in ``/usr/local/etc/apptainer/capabilities/user.root`` are maintained.
 * no: no capabilities are maintained, this gives the same behavior as the ``--no-privs`` option.
 
 .. note::
@@ -198,7 +198,7 @@ Or you can specify different source and destination locations using:
 
 .. code-block:: none
 
-  bind path = /etc/singularity/default-nsswitch.conf:/etc/nsswitch.conf
+  bind path = /etc/apptainer/default-nsswitch.conf:/etc/nsswitch.conf
 
 
 ``USER BIND CONTROL``:
@@ -356,7 +356,7 @@ Updating Configuration Options
 In order to manage this configuration file, Singularity has a ``config global``
 command group that allows you to get, set, reset, and unset values through the
 CLI. It's important to note that these commands must be run with elevated
-priveledges because the ``singularity.conf`` can only be modified by an
+priveledges because the ``apptainer.conf`` can only be modified by an
 administrator.
 
 Example
@@ -368,23 +368,23 @@ configuration:
 
 .. code-block:: none
 
-  $ sudo singularity config global --get "bind path"
+  $ sudo apptainer config global --get "bind path"
   /etc/localtime,/etc/hosts
 
 Now we can add a new path and verify it was successfully added:
 
 .. code-block:: none
 
-  $ sudo singularity config global --set "bind path" /etc/resolv.conf
-  $ sudo singularity config global --get "bind path"
+  $ sudo apptainer config global --set "bind path" /etc/resolv.conf
+  $ sudo apptainer config global --get "bind path"
   /etc/resolv.conf,/etc/localtime,/etc/hosts
 
 From here we can remove a path with:
 
 .. code-block:: none
 
-  $ sudo singularity config global --unset "bind path" /etc/localtime
-  $ sudo singularity config global --get "bind path"
+  $ sudo apptainer config global --unset "bind path" /etc/localtime
+  $ sudo apptainer config global --get "bind path"
   /etc/resolv.conf,/etc/hosts
 
 If we want to reset the option to the default at installation, then we can
@@ -392,8 +392,8 @@ reset it with:
 
 .. code-block:: none
 
-  $ sudo singularity config global --reset "bind path"
-  $ sudo singularity config global --get "bind path"
+  $ sudo apptainer config global --reset "bind path"
+  $ sudo apptainer config global --get "bind path"
   /etc/localtime,/etc/hosts
 
 And now we are back to our original option settings. You can also test what a
@@ -404,7 +404,7 @@ had been run without the ``--dry-run`` option:
 
 .. code-block:: none
 
-  $ sudo singularity config global --dry-run --set "bind path" /etc/resolv.conf
+  $ sudo apptainer config global --dry-run --set "bind path" /etc/resolv.conf
   # SINGULARITY.CONF
   # This is the global configuration file for Singularity. This file controls
   [...]
@@ -414,12 +414,12 @@ had been run without the ``--dry-run`` option:
   # the container. The file or directory must exist within the container on
   # which to attach to. you can specify a different source and destination
   # path (respectively) with a colon; otherwise source and dest are the same.
-  # NOTE: these are ignored if singularity is invoked with --contain.
+  # NOTE: these are ignored if apptainer is invoked with --contain.
   bind path = /etc/resolv.conf
   bind path = /etc/localtime
   bind path = /etc/hosts
   [...]
-  $ sudo singularity config global --get "bind path"
+  $ sudo apptainer config global --get "bind path"
   /etc/localtime,/etc/hosts
 
 Above we can see that ``/etc/resolv.conf`` is listed as a bind path in the
@@ -446,7 +446,7 @@ the path as an argument to the ``--apply-cgroups`` option like so:
 
 .. code-block:: none
 
-  $ sudo singularity shell --apply-cgroups /path/to/cgroups.toml my_container.sif
+  $ sudo apptainer shell --apply-cgroups /path/to/cgroups.toml my_container.sif
 
 
 Limiting memory
@@ -462,14 +462,14 @@ Start your container like so:
 
 .. code-block:: none
 
-  $ sudo singularity instance start --apply-cgroups path/to/cgroups.toml my_container.sif instance1
+  $ sudo apptainer instance start --apply-cgroups path/to/cgroups.toml my_container.sif instance1
 
 After that, you can verify that the container is only using 500MB of memory.
 (This example assumes that ``instance1`` is the only running instance.)
 
 .. code-block:: none
 
-  $ cat /sys/fs/cgroup/memory/singularity/*/memory.limit_in_bytes
+  $ cat /sys/fs/cgroup/memory/apptainer/*/memory.limit_in_bytes
     524288000
 
 Do not forget to stop your instances after configuring the options.
@@ -635,16 +635,16 @@ convenient. Singularity 3.7.0 provides a mechanism to administrators for managin
 a global keyring that ECL uses during signature verification, for that purpose a
 ``--global`` option was added for:
 
-  * ``singularity key import`` (root user only)
-  * ``singularity key pull`` (root user only)
-  * ``singularity key remove`` (root user only)
-  * ``singularity key export``
-  * ``singularity key list``
+  * ``apptainer key import`` (root user only)
+  * ``apptainer key pull`` (root user only)
+  * ``apptainer key remove`` (root user only)
+  * ``apptainer key export``
+  * ``apptainer key list``
 
 .. note::
     For security reasons, it is not possible to import private keys
     into this global keyring because it must be accessible by users
-    and is stored in the file ``SYSCONFDIR/singularity/global-pgp-public``.
+    and is stored in the file ``SYSCONFDIR/apptainer/global-pgp-public``.
 
 .. _gpu_library_configuration:
 
@@ -757,7 +757,7 @@ To do so, we would issue a command such as this:
 
 .. code-block:: none
 
-    $ sudo singularity capability add --user pinger CAP_NET_RAW
+    $ sudo apptainer capability add --user pinger CAP_NET_RAW
 
 This means the user ``pinger`` has just been granted permissions (through Linux
 capabilities) to open raw sockets within Singularity containers.
@@ -767,7 +767,7 @@ command.
 
 .. code-block:: none
 
-    $ sudo singularity capability list --user pinger
+    $ sudo apptainer capability list --user pinger
     CAP_NET_RAW
 
 To take advantage of this new capability, the user ``pinger`` must also request
@@ -776,7 +776,7 @@ the capability when executing a container with the ``--add-caps`` flag.
 
 .. code-block:: none
 
-    $ singularity exec --add-caps CAP_NET_RAW library://sylabs/tests/ubuntu_ping:v1.0 ping -c 1 8.8.8.8
+    $ apptainer exec --add-caps CAP_NET_RAW library://sylabs/tests/ubuntu_ping:v1.0 ping -c 1 8.8.8.8
     PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.
     64 bytes from 8.8.8.8: icmp_seq=1 ttl=52 time=73.1 ms
 
@@ -790,14 +790,14 @@ appropriate Linux capability like so:
 
 .. code-block:: none
 
-    $ sudo singularity capability drop --user pinger CAP_NET_RAW
+    $ sudo apptainer capability drop --user pinger CAP_NET_RAW
 
 Now if ``pinger`` tries to use ``CAP_NET_RAW``, Singularity will not give the
 capability to the container and ``ping`` will fail to create a socket:
 
 .. code-block:: none
 
-    $ singularity exec --add-caps CAP_NET_RAW library://sylabs/tests/ubuntu_ping:v1.0 ping -c 1 8.8.8.8
+    $ apptainer exec --add-caps CAP_NET_RAW library://sylabs/tests/ubuntu_ping:v1.0 ping -c 1 8.8.8.8
     WARNING: not authorized to add capability: CAP_NET_RAW
     ping: socket: Operation not permitted
 
@@ -835,7 +835,7 @@ Use the ``--security`` option to invoke the container like:
 
 .. code-block:: none
 
-  $ sudo singularity shell --security seccomp:/home/david/my.json my_container.sif
+  $ sudo apptainer shell --security seccomp:/home/david/my.json my_container.sif
 
 For more insight into security options, network options, cgroups, capabilities,
 etc, please check the `Userdocs <https://www.sylabs.io/guides/\{userversion\}/user-guide/>`_
@@ -846,7 +846,7 @@ remote.yaml
 ------------
 
 System-wide remote endpoints are defined in a configuration file typically
-located at ``/usr/local/etc/singularity/remote.yaml`` (this location may
+located at ``/usr/local/etc/apptainer/remote.yaml`` (this location may
 vary depending on installation parameters) and can be managed by
 administrators with the ``remote`` command group.
 
@@ -879,7 +879,7 @@ system-wide remote endpoint:
 
 .. code-block:: none
 
-    $ sudo singularity remote add --global company-remote https://enterprise.example.com
+    $ sudo apptainer remote add --global company-remote https://enterprise.example.com
     [sudo] password for dave:
     INFO:    Remote "company-remote" added.
     INFO:    Global option detected. Will not automatically log into remote.
@@ -888,7 +888,7 @@ Conversely, to remove a system-wide endpoint:
 
 .. code-block:: none
 
-    $ sudo singularity remote remove --global company-remote
+    $ sudo apptainer remote remove --global company-remote
     [sudo] password for dave:
     INFO:    Remote "company-remote" removed.
 
@@ -897,10 +897,10 @@ the only usable remote for the system by using the ``--exclusive`` flag:
 
 .. code-block:: none
 
-    $ sudo singularity remote use --exclusive company-remote
+    $ sudo apptainer remote use --exclusive company-remote
     [sudo] password for dave:
     INFO:    Remote "company-remote" now in use.
-    $ singularity remote list
+    $ apptainer remote list
     Cloud Services Endpoints
     ========================
 
@@ -924,7 +924,7 @@ please check the `Remote Userdocs <https://www.sylabs.io/guides/\{userversion\}/
 .. note::
 
    Once users login to a system wide endpoint, a copy of the endpoint will be listed in
-   a their ``~/.singularity/remote.yaml`` file. This means modifications or removal of
+   a their ``~/.apptainer/remote.yaml`` file. This means modifications or removal of
    the system-wide endpoint will not be reflected in the users configuration unless they
    remove the endpoint themselves.
 
