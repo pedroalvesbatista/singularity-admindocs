@@ -52,7 +52,7 @@ when running a container by default. Options include:
 
   The root user can manage the capabilities granted to individual containers when they
   are launched through the ``--add-caps`` and ``drop-caps`` flags.
-  Please see `Linux Capabilities <https://sylabs.io/guides/\{userversion\}/user-guide/security_options.html#linux-capabilities>`_
+  Please see `Linux Capabilities <https://apptainer.org/docs/\{userversion\}/user-guide/security_options.html#linux-capabilities>`_
   in the user guide for more information.
 
 Loop Devices
@@ -256,8 +256,7 @@ Networking Options
 
 The ``--network`` option can be used to specify a CNI networking
 configuration that will be used when running a container with `network
-virtualization
-<https://sylabs.io/guides/\{userversion\}/user-guide/networking.html>`_. Unrestricted
+virtualization <https://apptainer.org/docs/\{userversion\}/user-guide/networking.html>`_. Unrestricted
 use of CNI network configurations requires root privilege, as certain
 configurations may disrupt the host networking environment.
 
@@ -332,11 +331,11 @@ customized by system admins and referenced with the options below:
 
 ``CNI CONFIGURATION PATH``:
 This option allows admins to specify a custom path for the CNI configuration
-that Apptainer will use for `Network Virtualization <https://sylabs.io/guides/\{userversion\}/user-guide/networking.html>`_.
+that Apptainer will use for `Network Virtualization <https://apptainer.org/docs/\{userversion\}/user-guide/networking.html>`_.
 
 ``CNI PLUGIN PATH``:
 This option allows admins to specify a custom path for Apptainer to access
-CNI plugin executables. Check out the `Network Virtualization <https://sylabs.io/guides/\{userversion\}/user-guide/networking.html>`_
+CNI plugin executables. Check out the `Network Virtualization <https://apptainer.org/docs/\{userversion\}/user-guide/networking.html>`_
 section of the user guide for more information.
 
 ``MKSQUASHFS PATH``:
@@ -664,14 +663,13 @@ host drivers/libraries is dependent on the versions of the GPU compute
 frameworks that were used to build the applications. Compatibility and
 usage information is discussed in the `GPU Support` section of the
 `user guide
-<https://www.sylabs.io/guides/\{userversion\}/user-guide/>`__
+<https://www.apptainer.org/docs/\{userversion\}/user-guide/>`__
 
 
 NVIDIA GPUs / CUDA
 ==================
 
-If the `nvidia-container-cli
-<https://github.com/NVIDIA/libnvidia-container>`_ tool is installed on
+If the `nvidia-container-cli <https://github.com/NVIDIA/libnvidia-container>`_ tool is installed on
 the host system, it will be used to locate any Nvidia libraries and
 binaries on the host system.
 
@@ -838,8 +836,8 @@ Use the ``--security`` option to invoke the container like:
   $ sudo apptainer shell --security seccomp:/home/david/my.json my_container.sif
 
 For more insight into security options, network options, cgroups, capabilities,
-etc, please check the `Userdocs <https://www.sylabs.io/guides/\{userversion\}/user-guide/>`_
-and it's `Appendix <https://www.sylabs.io/guides/\{userversion\}/user-guide/appendix.html>`_.
+etc, please check the `Userdocs <https://www.apptainer.org/docs/\{userversion\}/user-guide/>`_
+and it's `Appendix <https://www.apptainer.org/docs/\{userversion\}/user-guide/appendix.html>`_.
 
 ------------
 remote.yaml
@@ -918,7 +916,7 @@ the only usable remote for the system by using the ``--exclusive`` flag:
     * Active cloud services keyserver
 
 For more details on the ``remote`` command group and managing remote endpoints,
-please check the `Remote Userdocs <https://www.sylabs.io/guides/\{userversion\}/user-guide/endpoint.html>`_.
+please check the `Remote Userdocs <https://www.apptainer.org/docs/\{userversion\}/user-guide/endpoint.html>`_.
 
 
 .. note::
@@ -938,4 +936,4 @@ administrator to create a global list of key servers used to verify container
 signatures by default.
 
 For more details on the ``remote`` command group and managing keyservers,
-please check the `Remote Userdocs <https://www.sylabs.io/guides/\{userversion\}/user-guide/endpoint.html>`_.
+please check the `Remote Userdocs <https://www.apptainer.org/docs/\{userversion\}/user-guide/endpoint.html>`_.

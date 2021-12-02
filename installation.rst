@@ -7,7 +7,7 @@ Installing Apptainer
 This section will guide you through the process of installing
 Apptainer {InstallationVersion} via several different methods. (For
 instructions on installing earlier versions of Apptainer please see
-`earlier versions of the docs <https://www.sylabs.io/docs/>`_.)
+`earlier versions of the docs <https://www.apptainer.org/docs/>`_.)
 
 =====================
 Installation on Linux
@@ -294,8 +294,7 @@ Download Apptainer from a release
 ===================================
 
 You can download Apptainer from one of the releases. To see a full
-list, visit `the GitHub release page
-<https://github.com/apptainer/releases>`_.  After deciding on
+list, visit `the GitHub release page <https://github.com/apptainer/releases>`_.  After deciding on
 a release to install, you can run the following commands to proceed
 with the installation.
 
@@ -556,7 +555,7 @@ Distribution packages of Apptainer
     recommended that you build from source using one of the methods
     detailed above.
 
-Install the CentOS/RHEL package using yum
+Install the RHEL/Rocky package using yum
 =========================================
 
 The EPEL (Extra Packages for Enterprise Linux) repos contain
@@ -586,7 +585,7 @@ library:
 
 
 See the `user guide
-<https://www.sylabs.io/guides/\{userversion\}/user-guide/>`__ for more
+<https://www.apptainer.org/docs/\{userversion\}/user-guide/>`__ for more
 information about how to use Apptainer.
 
 apptainer buildcfg

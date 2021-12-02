@@ -89,7 +89,7 @@ but :ref:`can be disabled <install-nonsetuid>` on build, or in the
 Installation from Source
 ------------------------
 
-Apptainer Community Edition can be installed from source directly,
+Apptainer can be installed from source directly,
 or by building an RPM package from the source. Various Linux
 distributions also package Apptainer, but their packages may not be
 up-to-date with the upstream version on GitHub.
@@ -111,7 +111,7 @@ below. Other methods are discussed in the :ref:`Installation
 Install Dependencies
 --------------------
 
-On Red Hat Enterprise Linux or CentOS install the following dependencies:
+On Enterprise Linux systems (Red Hat, CentOS, Fedora and Rocky) install the following dependencies:
 
 .. code-block:: sh
 
@@ -144,7 +144,7 @@ On Ubuntu or Debian install the following dependencies:
 Install Go
 ----------
 
-Apptainer v3 is written primarily in Go, and you will need Go 1.13
+Apptainer v1 is written primarily in Go, and you will need Go 1.13
 or above installed to compile it from source. Versions of Go packaged
 by your distribution may not be new enough to build Apptainer.
 
@@ -273,5 +273,5 @@ Sylabs Container Library:
 
 
 See the `user guide
-<https://www.sylabs.io/guides/\{userversion\}/user-guide/>`__ for more
+<https://www.apptainer.org/docs/\{userversion\}/user-guide/>`__ for more
 information about how to use Apptainer.

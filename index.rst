@@ -9,7 +9,7 @@ detail, and other topics important to system adminstrators working
 with Apptainer.
 
 See the `user guide
-<https://www.sylabs.io/guides/\{userversion\}/user-guide/>`__ for more
+<https://www.apptainer.org/docs/\{userversion\}/user-guide/>`__ for more
 information about how to use Apptainer.
 
 .. toctree::

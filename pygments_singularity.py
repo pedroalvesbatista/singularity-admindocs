@@ -5,7 +5,7 @@ import re
 
 class ApptainerLexer(RegexLexer):
     """
-    Lexer for pages in Apptainer Admin Guide at https://www.sylabs.io/guides/3.0/admin-guide/
+    Lexer for pages in Apptainer Admin Guide at https://www.apptainer.org/docs/3.0/admin-guide/
     """
 
     name = 'Apptainer'
